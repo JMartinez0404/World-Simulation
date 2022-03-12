@@ -1,20 +1,17 @@
 package com.welcome;
+import java.math.BigDecimal;
 
 public class Customer {
-    public enum CustomerType { NORMAL, RICH, UNKNOWN};
+    public enum CustomerType { NORMAL, RICH, UNKNOWN}
     private String name;
-    private double money;
+    private BigDecimal money;
     private CustomerType type;
 
-    public Customer(String name, double money) {
+    public Customer(String name, BigDecimal money) {
         this(name, money, CustomerType.UNKNOWN);
     }
 
-    public Customer(String name, CustomerType type) {
-        this(name, 0, type);
-    }
-
-    public Customer(String name, double money, CustomerType type) {
+    public Customer(String name, BigDecimal money, CustomerType type) {
         setName(name);
         setMoney(money);
         setType(type);
@@ -29,7 +26,7 @@ public class Customer {
         return name;
     }
 
-    public double getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
@@ -41,7 +38,7 @@ public class Customer {
         this.name = name;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 

@@ -1,14 +1,21 @@
 package com.welcome;
+import java.math.BigDecimal;
 
 public class Bank {
     private String name;
     private Employee[] employees;
     private Customer[] customers;
-    private double money;
+    private BigDecimal money;
 
-    public Bank(String name, Employee[] employees, Customer[] customers, double money) {
+    public Bank(String name, Employee[] employees, Customer[] customers, BigDecimal money) {
         setName(name);
-        setEmployees(employees);
+        if (employees.length == 0) {
+            this.customers = new Customer[1];
+            this.customers[0] = new Customer("zero customer", BigDecimal.ZERO);
+        }
+        else {
+            setEmployees(employees);
+        }
         setCustomers(customers);
         setMoney(money);
     }
@@ -27,31 +34,17 @@ public class Bank {
 
     public Customer[] getCustomers() { return customers; }
 
-    public double getMoney() { return money; }
+    public BigDecimal getMoney() { return money; }
 
     public void setName(String name) { this.name = name; }
 
     public void setEmployees(Employee[] employees) {
-        if (employees.length == 0) {
-            //throw warning here
-            System.out.println("WARNING: employees should be greater than or equal to 0.");
-            this.employees = new Employee[0];
-        }
-        else {
-            this.employees = employees;
-        }
+        this.employees = employees;
     }
 
     public void setCustomers(Customer[] customers) {
-        if (customers.length == 0) {
-            //throw warning here
-            System.out.println("WARNING: employees array should be greater than 0.");
-            this.customers = new Customer[1];
-        }
-        else {
-            this.customers = customers;
-        }
+        this.customers = customers;
     }
 
-    public void setMoney(double newMoney) { money = newMoney; }
+    public void setMoney(BigDecimal newMoney) { money = newMoney; }
 }

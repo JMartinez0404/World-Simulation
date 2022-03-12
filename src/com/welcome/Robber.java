@@ -1,10 +1,12 @@
 package com.welcome;
-import com.welcome.Customer.CustomerType;
+import java.math.BigDecimal;
+
+import java.math.RoundingMode;
 
 public class Robber extends Customer {
     private int riskFactor;
 
-    public Robber(String name, double money, CustomerType type, int riskFactor) {
+    public Robber(String name, BigDecimal money, CustomerType type, int riskFactor) {
         super(name, money, type);
         setRiskFactor(riskFactor);
     }
@@ -35,13 +37,13 @@ public class Robber extends Customer {
     }
 
     public void robBank(Bank bank) {
-        double availableMoney = bank.getMoney() / 2.0;
+        BigDecimal availableMoney = bank.getMoney().divide(BigDecimal.valueOf(2), RoundingMode.HALF_UP);
         //only half for now...might add that banks have some cash on hand while other money is not liquid or something
         int chanceOfSuccess = getRiskFactor();
 
         if (Math.round(Math.random() * 10) >= (10 / chanceOfSuccess)) {
-            super.setMoney(availableMoney + super.getMoney());
-            bank.setMoney(bank.getMoney() - availableMoney);
+            super.setMoney(availableMoney.add(super.getMoney()));
+            bank.setMoney(bank.getMoney().subtract(availableMoney));
             System.out.println("Robber was successful!!!");
         }
         else {
